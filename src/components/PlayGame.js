@@ -11,16 +11,6 @@ const PlayGame = (props) => {
     gameBetweenSeconds: 10,
   });
 
-  // React.useEffect(() => {
-  //   console.log('gameData', 'yues we are here')
-  //   setInitializeData({
-  //     ...initializeData,
-  //     gameData,
-  //     gameId,
-  //     gameBetweenSeconds: 10,
-  //   })
-  // }, [initializeData, gameData, gameId]);
-
   React.useEffect(() => {
     socket.on('selectCellResponse', data => {
       setInitializeData(reducer({
@@ -59,7 +49,11 @@ const PlayGame = (props) => {
             }
           }
         }
-        children.push(<td key={"cell" + i + j} className={showWinnerCell ? "winner-cell" : ""} ><div key={"cell-div" + i + j} className={"cell cell-" + initializeData.gameData.playboard[i][j]} onClick={(initializeData.gameData.game_status !== "ongoing" || socket.id !== initializeData.gameData.whose_turn || initializeData.gameData.playboard[i][j] ? () => void (0) : () => selectCell(i, j))}></div></td>)
+        children.push(<td key={"cell" + i + j} className={showWinnerCell ? "winner-cell" : ""} >
+          <div key={"cell-div" + i + j}
+            className={"cell cell-" + initializeData.gameData.playboard[i][j]}
+            onClick={(initializeData.gameData.game_status !== "ongoing" || socket.id !== initializeData.gameData.whose_turn ||
+              initializeData.gameData.playboard[i][j] ? () => void (0) : () => selectCell(i, j))}></div></td>)
       }
       table.push(<tr key={"row" + i} >{children}</tr>)
     }
@@ -67,17 +61,24 @@ const PlayGame = (props) => {
   }
 
   const selectCell = (i, j) => {
-    socket.emit('selectCell', { gameId, "i": i, "j": j });
+    const id = initializeData.gameId;
+    socket.emit('selectCell', { gameId: id, "i": i, "j": j });
   };
 
   return (
     gameData ? <>
-    {console.log('gameData', gameData)}
-    {console.log('initializeData', initializeData)}
       <Row>
         <Col>
           <p className={"text-center " + (socket.id !== gameData.whose_turn ? "active-player" : "")}>
-            {socket.id === initializeData.gameData.player1 ? (initializeData.gameData.game_status === "won" && initializeData.gameData.game_winner === initializeData.gameData.player2 ? "Opponent is Winner!!! " : " ") + initializeData.gameData[initializeData.gameData.player2].mobile_number + " | Played : " + initializeData.gameData[initializeData.gameData.player2].played + " | Won : " + initializeData.gameData[initializeData.gameData.player2].won + " | Draw : " + initializeData.gameData[initializeData.gameData.player2].draw : (initializeData.gameData.game_status === "won" && initializeData.gameData.game_winner === initializeData.gameData.player1 ? "Opponent is Winner!!! " : " ") + initializeData.gameData[initializeData.gameData.player1].mobile_number + " | Played : " + initializeData.gameData[initializeData.gameData.player1].played + " | Won : " + initializeData.gameData[initializeData.gameData.player1].won + " | Draw : " + initializeData.gameData[initializeData.gameData.player1].draw}
+            {socket.id === initializeData.gameData.player1 ?
+              (initializeData.gameData.game_status === "won" && initializeData.gameData.game_winner === initializeData.gameData.player2 ?
+                "Opponent is Winner!!! " : " ") + initializeData.gameData[initializeData.gameData.player2].mobile_number + " | Played : "
+              + initializeData.gameData[initializeData.gameData.player2].played + " | Won : " + initializeData.gameData[initializeData.gameData.player2].won
+              + " | Draw : " + initializeData.gameData[initializeData.gameData.player2].draw
+              : (initializeData.gameData.game_status === "won" && initializeData.gameData.game_winner === initializeData.gameData.player1 ?
+                "Opponent is Winner!!! " : " ") + initializeData.gameData[initializeData.gameData.player1].mobile_number + " | Played : "
+              + initializeData.gameData[initializeData.gameData.player1].played + " | Won : " + initializeData.gameData[initializeData.gameData.player1].won
+              + " | Draw : " + initializeData.gameData[initializeData.gameData.player1].draw}
           </p>
         </Col>
       </Row>
@@ -95,7 +96,15 @@ const PlayGame = (props) => {
       <Row>
         <Col>
           <p className={"text-center " + (socket.id === initializeData.gameData.whose_turn ? "active-player" : "")}>{
-            socket.id === initializeData.gameData.player1 ? (initializeData.gameData.game_status === "won" && initializeData.gameData.game_winner === initializeData.gameData.player1 ? "You are Winner!!! " : " ") + initializeData.gameData[initializeData.gameData.player1].mobile_number + " | Played : " + initializeData.gameData[initializeData.gameData.player1].played + " | Won : " + initializeData.gameData[initializeData.gameData.player1].won + " | Draw : " + initializeData.gameData[initializeData.gameData.player1].draw : (initializeData.gameData.game_status === "won" && initializeData.gameData.game_winner === initializeData.gameData.player2 ? "You are Winner!!! " : " ") + initializeData.gameData[initializeData.gameData.player2].mobile_number + " | Played : " + initializeData.gameData[initializeData.gameData.player2].played + " | Won : " + initializeData.gameData[initializeData.gameData.player2].won + " | Draw : " + initializeData.gameData[initializeData.gameData.player2].draw}
+            socket.id === initializeData.gameData.player1 ?
+              (initializeData.gameData.game_status === "won" && initializeData.gameData.game_winner === initializeData.gameData.player1 ?
+                "You are Winner!!! " : " ") + initializeData.gameData[initializeData.gameData.player1].mobile_number + " | Played : "
+              + initializeData.gameData[initializeData.gameData.player1].played + " | Won : " + initializeData.gameData[initializeData.gameData.player1].won
+              + " | Draw : " + initializeData.gameData[initializeData.gameData.player1].draw
+              : (initializeData.gameData.game_status === "won" && initializeData.gameData.game_winner === initializeData.gameData.player2 ?
+                "You are Winner!!! " : " ") + initializeData.gameData[initializeData.gameData.player2].mobile_number + " | Played : "
+              + initializeData.gameData[initializeData.gameData.player2].played + " | Won : " + initializeData.gameData[initializeData.gameData.player2].won
+              + " | Draw : " + initializeData.gameData[initializeData.gameData.player2].draw}
           </p>
         </Col>
       </Row>
@@ -112,7 +121,7 @@ const PlayGame = (props) => {
 
 export default PlayGame;
 
-export const reducer = action => (state, props) => {
+export const reducer = action => (state) => {
   switch (action.type) {
     case 'selectCellResponse':
       return {

@@ -1,11 +1,12 @@
 .table{
   width: auto;
   margin: auto;
+  background: skyblue;
 }
 .cell{
   height:100px;
   width:100px;
-  background-color: bisque;
+  background-color: azure;
   margin: auto;
   background-size: contain;
 }
@@ -13,15 +14,19 @@
   background-image:url(../images/cross.png);
 }
 .cell-o{
-  background-image:url(../images/check.png);
+  background-image:url(../images/circle.png);
 }
 .cell:hover{
   cursor: pointer;
   border:1px solid darkgoldenrod;
 }
+.text-center{
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: skyblue;
+}
 .active-player{
   color: green;
-  font-weight: bold;
 }
 .winner-cell{
   background-color: green;

@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import ParticlesBg from "particles-bg";
 import PlayerLogin from './components/PlayerLogin';
 import Players from './components/Players';
 import PlayGame from './components/PlayGame';
@@ -34,17 +35,16 @@ function App() {
   }, []);
 
   const registrationConfirmation = (value) => {
-    // If registration successfully redirect to player list
+    // If registration successful, redirect to player list
     const data = {
       ...initialData,
       isRegistered: value,
     }
-    console.log('rrs', data);
     setInitialData(data);
   };
 
   const gameStartConfirmation = (data) => {
-    // If select opponent player then start game and redirect to game play
+    // If we select opponent player then start game and redirect to game play
     setInitialData({
       ...initialData,
       isGameStarted: data.status, 
@@ -67,15 +67,15 @@ function App() {
   return (
     <Container>
       {
-        !initialData.isGameStarted ? !initialData.isRegistered ? <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+        !initialData.isGameStarted ? !initialData.isRegistered ? <div className="playerLogin">
           {initialData.socket
             ? <PlayerLogin socket={initialData.socket} registrationConfirmation={registrationConfirmation} />
             : <p>Loading...</p>}
-        </header> :
+        </div> :
           <Players socket={initialData.socket} gameStartConfirmation={gameStartConfirmation} /> :
           <PlayGame socket={initialData.socket} gameId={initialData.gameId} gameData={initialData.gameData} opponentLeft={opponentLeft} />
       }
+      <ParticlesBg type="random" bg={true} />
     </Container>
   );
 }

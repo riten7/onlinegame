@@ -12,7 +12,6 @@ const Players = (props) => {
     });
     socket.on('newOpponentAdded', data => {
       setOpponents([...opponents, data])
-      //opponents: [...this.state.opponents, data]
     });
     socket.on('opponentDisconnected', data => {
       var flag = false;
@@ -60,7 +59,7 @@ const Players = (props) => {
 
   return (
     <>
-      <h2>Please select opponent from the following</h2>
+      <h2>{opponents.length > 0 ? 'Please select your opponent...' : 'Waiting for other player to join the game...'}</h2>
       <ListGroup>
         {opponents.map(function (opponent, index) {
           return <ListGroup.Item 
