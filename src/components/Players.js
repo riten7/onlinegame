@@ -1,8 +1,8 @@
 import React from 'react';
 import { ListGroup } from 'react-bootstrap';
-import './ShowUsers.css';
+import './Players.css';
 
-const ShowUsers = (props) => {
+const Players = (props) => {
   const { socket, gameStartConfirmation } = props;
   const [opponents, setOpponents] = React.useState([]);
 
@@ -74,4 +74,4 @@ const ShowUsers = (props) => {
   )
 }
 
-export default ShowUsers;
+export default Players;

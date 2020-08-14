@@ -3,9 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import GetUserDetail from './components/GetUserDetail';
-import ShowUsers from './components/ShowUsers';
-import GamePlay from './components/GamePlay';
+import PlayerLogin from './components/PlayerLogin';
+import Players from './components/Players';
+import PlayGame from './components/PlayGame';
 import { Container } from 'react-bootstrap';
 import socketIOClient from "socket.io-client";
 
@@ -70,11 +70,11 @@ function App() {
         !initialData.isGameStarted ? !initialData.isRegistered ? <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           {initialData.socket
-            ? <GetUserDetail socket={initialData.socket} registrationConfirmation={registrationConfirmation} />
+            ? <PlayerLogin socket={initialData.socket} registrationConfirmation={registrationConfirmation} />
             : <p>Loading...</p>}
         </header> :
-          <ShowUsers socket={initialData.socket} gameStartConfirmation={gameStartConfirmation} /> :
-          <GamePlay socket={initialData.socket} gameId={initialData.gameId} gameData={initialData.gameData} opponentLeft={opponentLeft} />
+          <Players socket={initialData.socket} gameStartConfirmation={gameStartConfirmation} /> :
+          <PlayGame socket={initialData.socket} gameId={initialData.gameId} gameData={initialData.gameData} opponentLeft={opponentLeft} />
       }
     </Container>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-const GetUserDetail = (props) => {
+const PlayerLogin = (props) => {
   const { socket, registrationConfirmation } = props;
   const [mobileNumber, setMobileNumber] = React.useState('1234567890');
 
@@ -34,4 +34,4 @@ const GetUserDetail = (props) => {
   )
 }
 
-export default GetUserDetail;
+export default  PlayerLogin;

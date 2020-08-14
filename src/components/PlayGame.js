@@ -1,8 +1,8 @@
 import React from 'react';
 import { Table, Row, Col } from 'react-bootstrap';
-import './GamePlay.css';
+import './PlayGame.css';
 
-const GamePlay = (props) => {
+const PlayGame = (props) => {
   const { gameData, gameId, socket, opponentLeft } = props;
 
   const [initializeData, setInitializeData] = React.useState({
@@ -110,7 +110,7 @@ const GamePlay = (props) => {
   )
 }
 
-export default GamePlay;
+export default PlayGame;
 
 export const reducer = action => (state, props) => {
   switch (action.type) {
