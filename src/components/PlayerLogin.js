@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { TextAnimation } from './TextAnimation';
 
 const PlayerLogin = (props) => {
   const { socket, registrationConfirmation } = props;
@@ -11,7 +12,7 @@ const PlayerLogin = (props) => {
     });
   }, [socket, registrationConfirmation])
 
-  const submitMobileNumber = () => {
+  const submitName = () => {
     socket.emit('checkUserDetail', { "mobileNumber": playerName });
   };
   const onMobileNumberChange = (e) => {
@@ -21,8 +22,9 @@ const PlayerLogin = (props) => {
   return (
     <Form>
       <Form.Group>
+        <TextAnimation />
         <Form.Control type="text" value={playerName} onChange={onMobileNumberChange} placeholder="Enter your name" />
-        <Button disabled={playerName.length < 5} onClick={submitMobileNumber} variant="primary" type="button">
+        <Button disabled={playerName.length < 5} onClick={submitName} variant="primary" type="button">
           Submit
                     </Button>
       </Form.Group>

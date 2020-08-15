@@ -65,6 +65,7 @@ function App() {
   };
 
   return (
+    <>
     <Container>
       {
         !initialData.isGameStarted ? !initialData.isRegistered ? <div className="playerLogin">
@@ -75,8 +76,9 @@ function App() {
           <Players socket={initialData.socket} gameStartConfirmation={gameStartConfirmation} /> :
           <PlayGame socket={initialData.socket} gameId={initialData.gameId} gameData={initialData.gameData} opponentLeft={opponentLeft} />
       }
-      <ParticlesBg type="random" bg={true} />
     </Container>
+    <ParticlesBg type="random" bg={true} />
+    </>
   );
 }
 

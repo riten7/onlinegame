@@ -59,7 +59,7 @@ const Players = (props) => {
 
   return (
     <>
-      <h2>{opponents.length > 0 ? 'Please select your opponent...' : 'Waiting for other player to join the game...'}</h2>
+      <h2 className="text-center">{opponents.length > 0 ? 'Please select your opponent...' : 'Waiting for other player to join the game...'}</h2>
       <ListGroup>
         {opponents.map(function (opponent, index) {
           return <ListGroup.Item 

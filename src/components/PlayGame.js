@@ -70,6 +70,10 @@ const PlayGame = (props) => {
       <Row>
         <Col>
           <p className={"text-center " + (socket.id !== gameData.whose_turn ? "active-player" : "")}>
+            {initializeData.gameData[initializeData.gameData.player1].mobile_number + "  VS  " +
+            initializeData.gameData[initializeData.gameData.player2].mobile_number }
+          </p>
+          <p className={"text-center " + (socket.id !== gameData.whose_turn ? "active-player" : "")}>
             {socket.id === initializeData.gameData.player1 ?
               (initializeData.gameData.game_status === "won" && initializeData.gameData.game_winner === initializeData.gameData.player2 ?
                 "Opponent is Winner!!! " : " ") + initializeData.gameData[initializeData.gameData.player2].mobile_number + " | Played : "
